@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+   {% if category %}
+     {{category.desc|truncatewords:155}}
+   {% else %}
+    Welcome to All In Bloom Collections where you can buys different items...
+   {% endif %}
+{% endblock %}
+
+{% block title %}
+  {% if category %}
+     {{category.name}} - All in Bloom Collections
+  {% else %}
+  See our New Collections - All in Bloom Collections
+  {% endif %}
+{% endblock %}
+{% block content %}
+   {% if category %}
+    <div>
+        <div class="row my_row_class">
+            <div class="mx_auto">
+            <p><a href="{% url 'shopapp:allProdCat' %}">Our Product Collections</a></p>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="mx_auto">
+        {% if category %}
+        <img class="my_image my_image_padding" src="{{category.img.url}}" alt="{{category.name}}" style="width:1300px;height:550px;">
+    </div>
+<br>
+<div>
+    <h1 class="text-center my_title">{{category.name}}</h1>
+    <p class="text-justify">{{category.desc}}</p>
+
+</div>
+
+     {% else %}
+<div>
+    <img class="my_image my_image_padding" src="{% static 'img/Banner.png' %}" alt="Our Products" style="width:1300px;height:550px;">
+</div>
+<br>
+
+<div>
+    <h1 class="text-center my_title">Our Product Collections</h1>
+    <p class="text-justify">A shopping cart known by a variety of other names, is a wheeled cart supplied by a shop or store, especially supermarkets, for use by customers inside the premises for transport of merchandise as they move around the premises, while shopping, prior to heading to the checkout counter, cashiers or tills. Increasing the amount of goods a shopper can collect increases the quantities they are likely to purchase in a single trip, boosting store profitability.</p>
+</div>
+{% endif %}
+{% if user.is_authenticated %}
+<div class="container">
+    <div class="row mx_auto">
+    {% for product in products.object_list %}
+    <div class="my_bottom_margin col-9 col-sm-12 col-md-4 col-lg-4">
+        <div class="card text-center">
+            <a href="{{product.get_url}}"><img class="card-img-top my_image" src="{{product.img.url}}" alt="{{product.name}}" style="width:350px;height:350px;"></a>
+        </div>
+        <div class="card-body">
+            <h4>{{product.name}}</h4>
+            <p>{{product.price}}</p>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    <div class="mx_auto">
+        {% if products.paginator.num_pages %}
+        <hr>
+        <div class="text-center">
+            {% for pg in products.paginator.page_range %}
+            <a href="?page={{pg}}" class="btn btn-lightmbtn-sm {% if products.number == pg %} active {% endif %}">{{pg}}</a>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endif %}
+    <br>
+{% endblock %}
