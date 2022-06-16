@@ -95,7 +95,11 @@
             <div class="mx_auto">
 
                 <a href="{% url 'shopapp:allProdCat' %}" class="btn btn-secondary btn-block my_custom_button">Continue Shopping</a>
-                 <a href="{% url 'shopapp:allProdCat' %}" class="btn btn-success btn-block my_custom_button">Payment</a>
+
+                <form action="{% url 'payments:checkout_session' %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-primary" type="submit">Checkout</button>
+                </form>
             </div>
         </div>
     </div>

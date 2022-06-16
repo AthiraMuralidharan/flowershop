@@ -1,0 +1,76 @@
+{% extends 'membership/base1.html' %}
+{% block content %}
+<!--{% load static %}-->
+
+<br>
+<div class="container">
+    <b style="color: rgb(16, 82, 53);">Welcome  {{user.first_name}}, Your Premium plan is Active</b>
+
+</div>
+
+{% if user.customer.membership == True %}
+{% if user.customer.cancel_at_period_end == True %}
+
+                Your subscription is canceled<br>
+                Your subscription will run to the end of your billing cycle.
+                <br><br>
+<!--                <a href="{% url 'subscription_app:join' %}">Get new subscription</a>-->
+
+
+            {% elif user.customer.status == 'active' %}
+                <div class="container">
+                    <a href="{% url 'subscription_app:pausepayment' %}">Pause Subscription</a>
+                </div>
+                <br>
+                <div class="container">
+                    <a href="{% url 'subscription_app:Updatesubscription' %}">Update Subscription</a>
+                </div>
+                <br>
+                <br>
+                <form action="{% url 'subscription_app:canceled' %}">
+                    {% csrf_token %}
+                    <input type="submit" value="Cancel Membership?">
+                </form>
+            {% elif user.customer.status == 'pause' %}
+                <div class="container">
+                    <a href="{% url 'subscription_app:Resumepayment' %}">Resume Subscription</a>
+                </div>
+                <br>
+                <div class="container">
+                    <a href="{% url 'subscription_app:Updatesubscription' %}">Update Subscription</a>
+                </div>
+                <br>
+                <form action="{% url 'subscription_app:delete' %}">
+                    {% csrf_token %}
+                    <input type="submit" value="Cancel Membership?">
+                </form>
+
+
+            {% else %}
+
+                <div class="container">
+                    <a href="{% url 'subscription_app:pausepayment' %}">Pause Subscription</a>
+                </div>
+                <br>
+                <div class="container">
+                    <a href="{% url 'subscription_app:Resumepayment' %}">Resume Subscription</a>
+                </div>
+                <br>
+                <div class="container">
+                    <a href="{% url 'subscription_app:Updatesubscription' %}">Update Subscription</a>
+                </div>
+                <br>
+                <br>
+                <form action="{% url 'subscription_app:canceled' %}">
+                    {% csrf_token %}
+                    <input type="submit" value="Cancel Membership?">
+                </form>
+
+{% endif %}
+<!--            {% else %}-->
+<!--                <a href="{% url 'subscription_app:join' %}">Get a membership</a>-->
+
+  {% endif %}
+{% endblock %}
+
+

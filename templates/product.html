@@ -34,8 +34,16 @@
             {% if product.stock <= 0 %}
             <p class="text-justify my-prod-text"><b>Out of Stock</b></p>
             {% else %}
+
             <a class="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>
+<!--                 <a href="{% url 'subscription_app:index' %}" class="btn btn-success btn-block my_custom_button"><button>Subscription</button></a>-->
+<!--        {% if user.customer.membership == True %}-->
+<!--          <a class="btn btn-primary ml-lg-3" href="{% url 'subscription_app:settings' %}">Premium</a>-->
+<!--        {% else %}-->
+<!--          <a class="btn btn-primary ml-lg-3" href="{% url 'subscription_app:join' %}">subscribe</a>-->
+<!--        {% endif %}-->
             {% endif %}
+
         </div>
     </div>
 </div>

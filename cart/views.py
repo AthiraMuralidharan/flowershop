@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from shopapp.models import Product
 from .models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.generic import View
 
 
 # Create your views here.
@@ -10,6 +11,14 @@ def _cart_id(request):
     if not cart:
         cart = request.session.create()
     return cart
+
+
+# class _cart_id(View):
+#   def POST(self,request):
+#     cart = request.session.session_key
+#     if not cart:
+#         cart = request.session.create()
+#     return cart
 
 
 def add_cart(request, product_id):
@@ -36,6 +45,9 @@ def cart_deatil(request, total=0, counter=0, cart_items=None):
         for cart_item in cart_items:
             total += (cart_item.product.price * cart_item.quantity)
             counter += cart_item.quantity
+
+        request.session['total'] = int(total)
+
     except ObjectDoesNotExist:
         pass
     return render(request, 'cart.html', dict(cart_items=cart_items, total=total, counter=counter))

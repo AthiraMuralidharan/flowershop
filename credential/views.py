@@ -69,10 +69,15 @@ class RegistrationView(View):
 
         return render(request, 'register.html')
 
-class LogoutView(View):
-    def get(self,request):
-      return redirect('/home/')
 
+# class LogoutView(View):
+#     def get(self, request):
+#         return redirect('/home/')
+
+# class LogoutView(View):
+#     def get(request):
+#         auth.logout(request)
+#         return redirect('/home/')
 
 # def register_user(request):
 #     if request.method == 'POST':
@@ -106,3 +111,6 @@ class LogoutView(View):
 # def logout(request):
 #     auth.logout(request)
 #     return redirect('/home/')
+def LogoutView(request):
+    auth.logout(request)
+    return redirect('/home/')

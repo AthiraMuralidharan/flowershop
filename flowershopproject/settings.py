@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'shopapp',
     'search_app',
     'cart',
+    'payments',
+    'subscription_app',
     'credential',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -133,3 +135,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51L0garSIjRsqsoNHodPloH9hBKFOF9chELD47kAOo3G6xolKLwBlTOScORNiv8tmQMdwcwR4CWncjQndgmYczAgD00ir0lK6rm'
+STRIPE_SECRET_KEY = 'sk_test_51L0garSIjRsqsoNHCiAx6iokXzrzlqH9U4hf1HTZCcAAgyfC6Edj8SWTtGW2rbndzx5br09zGcMgNdvIVBiJn4LS008wXPRAwE'

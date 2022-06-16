@@ -25,7 +25,8 @@ urlpatterns = [
     path('search/',include('search_app.urls')),
     path('cart/',include('cart.urls')),
     path('credential/',include('credential.urls')),
-
+    path('payments/',include('payments.urls')),
+    path('subscription_app/',include('subscription_app.urls')),
 
 ]
 if settings.DEBUG:
